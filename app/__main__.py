@@ -2,7 +2,9 @@
 from aiohttp import web
 from os import mkdir
 from datetime import datetime
-import logging 
+from pathlib import Path
+import logging
+import sys
 
 """
 Logging Stuff
@@ -22,7 +24,7 @@ if sys.platform.lower() == 'win32':
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG) # we want to not filter messages yet
 
-fh = logging.FileHandler()
+fh = logging.FileHandler(fp)
 fh.setLevel(logging.DEBUG)
 
 ch = logging.StreamHandler()
@@ -42,7 +44,24 @@ aiohttp stuff
 
 routes = web.RouteTableDef()
 
+@web.middleware
+async def static_server(request, handler):
 
+    rel_fp = Path(request.path).relative_to('/')
+    fp = Path('./static') / rel_fp
+
+    if fp.is_dir(): # somebody is looking for /
+        fp /= 'index.html'
+
+    if not fp.exists():
+        return await handler(request)
+
+    return web.FileResponse(fp)
+
+if __name__ == '__main__':
+    app = web.Application(middlewares=[static_server])
+    app.add_routes(routes)
+    web.run_app(app, port=8000)
 
 
 
