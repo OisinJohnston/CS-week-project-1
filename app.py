@@ -49,7 +49,7 @@ class DatabaseHandler():
     """
 
     def __init__(self, db_path):
-        self.conection = sqlite3.connect(db_path)
+        self.connection = sqlite3.connect(db_path)
         cursor = self.get_cursor()
         cursor.execute("""CREATE TABLE IF NOT EXISTS users(
                            userid INTEGER PRIMARY KEY,
@@ -59,8 +59,8 @@ class DatabaseHandler():
                             guessid  INTEGER PRIMARY KEY,
                             guesser  INTEGER NOT NULL,
                             guessval INTEGER NOT NULL,
-                            correct  BOOLEAN NOT NULL
-                            FORIEGN KEY (guesser) REFERENCES users(id)
+                            correct  BOOLEAN NOT NULL,
+                            FOREIGN KEY (guesser) REFERENCES users(id)
                        );""")
         self.commit()
 
@@ -71,20 +71,20 @@ class DatabaseHandler():
     def get_cursor(self):
         return self.connection.cursor()
 
-    def commit(self)
+    def commit(self):
         return self.connection.commit()
 
 
     def has_user(self, username):
         cur = self.get_cursor()
-        res = cur.execute("SELECT 1 FROM users WHERE name='?';", (username,))
+        res = cur.execute("SELECT 1 FROM users WHERE name=?;", (username,))
         return bool(res.fetchall())
 
     def add_user(self, username):
-        if self.has_user():
+        if self.has_user(username):
             return
         cur = self.get_cursor()
-        cur.execute("INSERT INTO users(name) VALUES ('?');", (username,))
+        cur.execute("INSERT INTO users(name) VALUES (?);", (username,))
         self.commit()
 
     def add_guess(self, userid, guess, correct):
@@ -122,6 +122,7 @@ async def static_server(request, handler):
 
 if __name__ == '__main__':
     app = web.Application(middlewares=[static_server])
+    app["database"] = DatabaseHandler("./database.db")
     app.add_routes(routes)
     web.run_app(app, port=8000)
 
