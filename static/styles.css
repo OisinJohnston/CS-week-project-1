@@ -1,0 +1,16 @@
+body {
+    background-color: beige;
+}
+
+img {
+    margin-top: 10;
+    margin-right: 10;
+}
+
+button {
+	background-color: #123;
+}
+
+button a:hover {
+    background-color: greenyellow;
+}
