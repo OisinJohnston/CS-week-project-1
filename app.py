@@ -56,10 +56,10 @@ class DatabaseHandler():
                            name TEXT NOT NULL UNIQUE
                        );""")
         cursor.execute("""CREATE TABLE IF NOT EXISTS guesses(
-                            guessid  INTEGER PRIMARY KEY,
-                            guesser  INTEGER NOT NULL,
-                            guessval INTEGER NOT NULL,
-                            correct  BOOLEAN NOT NULL,
+                            guessid    INTEGER PRIMARY KEY,
+                            guesser    INTEGER NOT NULL,
+                            numguesses INTEGER NOT NULL,
+                            finished   BOOLEAN NOT NULL,
                             FOREIGN KEY (guesser) REFERENCES users(id)
                        );""")
         self.commit()
@@ -105,6 +105,9 @@ AIOHTTP Stuff
 
 routes = web.RouteTableDef()
 
+@routes.post('/api/users')
+async def add_user():
+    return web.HTTPNotFound()
 
 @web.middleware
 async def static_server(request, handler):
