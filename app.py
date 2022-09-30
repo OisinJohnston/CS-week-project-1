@@ -82,10 +82,11 @@ class DatabaseHandler():
 
     def add_user(self, username):
         if self.has_user(username):
-            return
+            return False
         cur = self.get_cursor()
         cur.execute("INSERT INTO users(name) VALUES (?);", (username,))
         self.commit()
+        return True
 
     def add_guess(self, userid, guess, correct):
         cur = self.get_cursor()
@@ -106,9 +107,20 @@ AIOHTTP Stuff
 routes = web.RouteTableDef()
 
 @routes.post('/api/users')
-async def add_user():
-    return web.HTTPNotFound()
+async def add_user(request):
+    db = request.app["database"]
+    json = await request.json()
+    username = json["name"]
+    if db.add_user(username):
+        return web.HTTPCreated()
+    else:
+        return web.HTTPConflict()
 
+@routes.post('/api/guesses')
+async def add_guess(request):
+    raise NotImplementedError()
+
+    
 @web.middleware
 async def static_server(request, handler):
 
