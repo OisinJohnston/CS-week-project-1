@@ -1,0 +1,49 @@
+body {
+    background-color: #ffd;
+    border: #123;
+}
+
+.center {
+    text-align: center;
+}
+
+.logo {
+    margin-top: 10;
+    margin-right: 10;
+    background-color: #fff;
+    border: 3px solid #123;
+}
+
+button {
+	background-color: #ffd;
+    color: #123;
+    border-color: #123;
+    border-style: solid;
+    height: 100px;
+    width: 200px;
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: #123;
+    border-color: #fff;
+    color: #fff;
+}
+
+.boxes {
+    display: table;
+}
+
+.column2 {
+    width: 43%;
+}
+
+.col {
+    float: left;
+    height: 470px;
+    width: 23%;
+    padding: 0 10px;  
+    margin-top: 15px; 
+
+    
+}
