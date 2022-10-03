@@ -79,6 +79,11 @@ class DatabaseHandler():
         cur = self.get_cursor()
         res = cur.execute("SELECT 1 FROM users WHERE name=?;", (username,))
         return bool(res.fetchall())
+    
+    def get_user_id(username):
+        cur = self.get_cursor()
+        res = cur.execute("SELECT userid FROM users WHERE name=?;", (username,))
+        return res.fetchall()[0]
 
     def add_user(self, username):
         if self.has_user(username):
@@ -118,7 +123,9 @@ async def add_user(request):
 
 @routes.post('/api/guesses')
 async def add_guess(request):
-    raise NotImplementedError()
+    db = request.app["database"]
+    json = await request.json()
+    if 
 
     
 @web.middleware
