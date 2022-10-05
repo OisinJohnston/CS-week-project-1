@@ -125,7 +125,8 @@ async def add_user(request):
 async def add_guess(request):
     db = request.app["database"]
     json = await request.json()
-    if 
+    if "name" in json:
+        pass 
 
     
 @web.middleware
