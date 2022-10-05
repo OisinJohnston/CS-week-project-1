@@ -79,7 +79,7 @@ class DatabaseHandler():
         cur = self.get_cursor()
         res = cur.execute("SELECT 1 FROM users WHERE name=?;", (username,))
         return bool(res.fetchall())
-    
+
     def get_user_id(username):
         cur = self.get_cursor()
         res = cur.execute("SELECT userid FROM users WHERE name=?;", (username,))
@@ -100,6 +100,7 @@ class DatabaseHandler():
             (userid, guess, correct)
         )
         self.commit()
+        # This is a comment
 
 
 
@@ -126,9 +127,9 @@ async def add_guess(request):
     db = request.app["database"]
     json = await request.json()
     if "name" in json:
-        pass 
+        pass
 
-    
+
 @web.middleware
 async def static_server(request, handler):
 
