@@ -96,11 +96,10 @@ class DatabaseHandler():
     def add_guess(self, userid, guess, correct):
         cur = self.get_cursor()
         cur.execute(
-            "INSERT INTO guesses(guesser, guessval, correct) VALUES (?, ?, ?);",
+            "INSERT INTO guesses(guesser, numguesses, finished) VALUES (?, ?, ?);",
             (userid, guess, correct)
         )
         self.commit()
-        # This is a comment
 
 
 
@@ -126,8 +125,16 @@ async def add_user(request):
 async def add_guess(request):
     db = request.app["database"]
     json = await request.json()
+
     if "name" in json:
-        pass
+        userid = db.get_user_id(json["name"])
+    else:
+        userid = json["userid"]
+
+    guesses = json["numguesses"]
+    correct = json["completed"]
+
+    db.add_guess(userid, guesses, correct)
 
 
 @web.middleware
