@@ -100,7 +100,7 @@ class DatabaseHandler():
                 "user": {
                     "id": result[1],
                     "name": get_username(result[1])
-                }
+                },
                 "numguesses": result[2],
                 "finished": result[3]
             })
