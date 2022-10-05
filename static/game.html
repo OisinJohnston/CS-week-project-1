@@ -10,7 +10,7 @@
         <img src="https://olive-contoso.s3.eu-west-1.amazonaws.com/athlonecc.ie/athlone.png">
         </div>
         
-		<table>
+		<table id="center">
                 <tr>
 					<td>
 	                    <label for="usernameinp"> Enter your Username: </label>
@@ -18,16 +18,16 @@
 					</td>
 					<td>
 
-	                    <button>Check Username Availability</button>
+	                    <button onclick="checkusername()">Check Username Availability</button>
 					</td>
                 </tr>
 				<tr>
-						<td>						
-		                    <a href="testgame.html"><button>Test Run</button></a>
-						</td>
-						<td>						
-	    	                <a href="realgame.html"><button>Challenge</button></a>
-						</td>
+					<td>						
+						<a href="testgame.html"><button>Test Run</button></a>
+					</td>
+					<td>						
+						<button onclick="getChallenge()">Challenge</button>
+					</td>
 				</tr>
         </table>
 
