@@ -80,17 +80,17 @@ class DatabaseHandler():
         res = cur.execute("SELECT 1 FROM users WHERE name=?;", (username,))
         return bool(res.fetchall())
 
-    def get_user_id(username):
+    def get_user_id(self, username):
         cur = self.get_cursor()
         res = cur.execute("SELECT userid FROM users WHERE name=?;", (username,))
         return res.fetchall()[0][0]
 
-    def get_username(userid):
+    def get_username(self, userid):
         cur = self.get_cursor()
         res = cur.execute("SELECT name FROM users WHERE id=?;", (userid,))
         return res.fetchall()[0][0]
 
-    def get_guesses():
+    def get_guesses(self):
         cur = self.get_cursor()
         res = cur.execute("SELECT * FROM guesses;", [])
         response = []
@@ -104,6 +104,7 @@ class DatabaseHandler():
                 "numguesses": result[2],
                 "finished": result[3]
             })
+        return response
 
 
     def add_user(self, username):
@@ -156,11 +157,13 @@ async def add_guess(request):
     correct = json["completed"]
 
     db.add_guess(userid, guesses, correct)
+    return web.HTTPCreated()
 
 @routes.get('/api/guesses')
 async def get_guess(request):
     db = request.app["database"]
     resp = db.get_guesses()
+    logger.info(resp)
     return web.json_response(resp)
 
 
