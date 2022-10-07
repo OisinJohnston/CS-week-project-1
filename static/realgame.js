@@ -5,6 +5,7 @@ function rng(min, max) {
 let number = rng(1, 200);
 let guesses = 0;
 let guessed = false;
+console.log(number);
 
 function submit() {
     fetch(url='/api/guesses', {
