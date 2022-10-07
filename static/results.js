@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			var compcell = row.insertCell(2);
 			namecell.innerHTML = item["user"]["name"];
 			guessescell.innerHTML = item["numguesses"];
-			compcell.innerHTML = Boolean(item["completed"]);
+			compcell.innerHTML = item["completed"] != 1;
 		}
 		
 	})
