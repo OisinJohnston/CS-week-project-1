@@ -44,7 +44,7 @@ button:hover {
     margin-top: 15px; 
 
     
-} 
+
 img {
     display: block;
     margin-left: auto;
@@ -67,4 +67,14 @@ img {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
+  
+}
+
+#results {
+	margin: auto;
+	width: 70%;
+	text-align: center;
+	padding: 0px;
+	border: solid;
+
+}

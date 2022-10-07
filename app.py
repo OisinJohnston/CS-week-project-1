@@ -87,7 +87,7 @@ class DatabaseHandler():
 
     def get_username(self, userid):
         cur = self.get_cursor()
-        res = cur.execute("SELECT name FROM users WHERE id=?;", (userid,))
+        res = cur.execute("SELECT name FROM users WHERE userid=?;", (userid,))
         return res.fetchall()[0][0]
 
     def get_guesses(self):
@@ -99,7 +99,7 @@ class DatabaseHandler():
                 "guessid": result[0],
                 "user": {
                     "id": result[1],
-                    "name": get_username(result[1])
+                    "name": self.get_username(result[1])
                 },
                 "numguesses": result[2],
                 "finished": result[3]
