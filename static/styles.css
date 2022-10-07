@@ -47,7 +47,7 @@ button:hover {
     margin-top: 15px; 
 
     
-} 
+
 img {
     width: 100%;
   }  
@@ -70,3 +70,14 @@ img {
     margin-left: auto;
     margin-right: auto;
   }
+  
+}
+
+#results {
+	margin: auto;
+	width: 70%;
+	text-align: center;
+	padding: 0px;
+	border: solid;
+
+}
