@@ -1,11 +1,9 @@
 body {
-    background-color: #ffd;
+    background-color: rgb(209, 209, 191);
     border: #123;
 }
 
-.center {
-    text-align: center;
-}
+
 
 .logo {
     margin-top: 10;
@@ -15,7 +13,7 @@ body {
 }
 
 button {
-	background-color: #ffd;
+	background-color: rgb(156, 156, 150);
     color: #123;
     border-color: #123;
     border-style: solid;
@@ -46,4 +44,27 @@ button:hover {
     margin-top: 15px; 
 
     
-}
+} 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+  }  
+ 
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10;
+  }
+
+  
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
