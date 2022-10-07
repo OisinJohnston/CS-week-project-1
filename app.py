@@ -79,11 +79,32 @@ class DatabaseHandler():
         cur = self.get_cursor()
         res = cur.execute("SELECT 1 FROM users WHERE name=?;", (username,))
         return bool(res.fetchall())
-    
+
     def get_user_id(username):
         cur = self.get_cursor()
         res = cur.execute("SELECT userid FROM users WHERE name=?;", (username,))
-        return res.fetchall()[0]
+        return res.fetchall()[0][0]
+
+    def get_username(userid):
+        cur = self.get_cursor()
+        res = cur.execute("SELECT name FROM users WHERE id=?;", (userid,))
+        return res.fetchall()[0][0]
+
+    def get_guesses():
+        cur = self.get_cursor()
+        res = cur.execute("SELECT * FROM guesses;", [])
+        response = []
+        for result in res.fetchall():
+            response.append({
+                "guessid": result[0],
+                "user": {
+                    "id": result[1],
+                    "name": get_username(result[1])
+                },
+                "numguesses": result[2],
+                "finished": result[3]
+            })
+
 
     def add_user(self, username):
         if self.has_user(username):
@@ -96,7 +117,7 @@ class DatabaseHandler():
     def add_guess(self, userid, guess, correct):
         cur = self.get_cursor()
         cur.execute(
-            "INSERT INTO guesses(guesser, guessval, correct) VALUES (?, ?, ?);",
+            "INSERT INTO guesses(guesser, numguesses, finished) VALUES (?, ?, ?);",
             (userid, guess, correct)
         )
         self.commit()
@@ -125,10 +146,24 @@ async def add_user(request):
 async def add_guess(request):
     db = request.app["database"]
     json = await request.json()
-    if "name" in json:
-        pass 
 
-    
+    if "name" in json:
+        userid = db.get_user_id(json["name"])
+    else:
+        userid = json["userid"]
+
+    guesses = json["numguesses"]
+    correct = json["completed"]
+
+    db.add_guess(userid, guesses, correct)
+
+@routes.get('/api/guesses')
+async def get_guess(request):
+    db = request.app["database"]
+    resp = db.get_guesses()
+    return web.json_response(resp)
+
+
 @web.middleware
 async def static_server(request, handler):
 
