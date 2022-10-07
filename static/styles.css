@@ -5,12 +5,15 @@ body {
 
 
 
-.logo {
-    margin-top: 10;
-    margin-right: 10;
+
+
+.border{ 
     background-color: #fff;
     border: 3px solid #123;
+    display: block;
 }
+
+
 
 button {
 	background-color: rgb(156, 156, 150);
@@ -46,17 +49,10 @@ button:hover {
     
 
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 10%;
+    width: 100%;
   }  
  
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 10;
-  }
+ 
 
   
   input[type=text], select {
@@ -67,6 +63,13 @@ img {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+  }
+
+  .container{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
   
 }
 
