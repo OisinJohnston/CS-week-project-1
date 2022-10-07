@@ -7,30 +7,38 @@
 		<script src="game.js"></script>
 	</head>
     <body>
-        <div class="logo">
-        <img src="https://olive-contoso.s3.eu-west-1.amazonaws.com/athlonecc.ie/athlone.png">
-        </div>
-        
-		<table id="center">
-                <tr>
-					<td>
-	                    <label for="usernameinp"> Enter your Username: </label>
-    	                <input id="usernameinp" type="text"> 
-					</td>
-					<td>
 
-	                    <button onclick="checkusername()">Check Username Availability</button>
-					</td>
-                </tr>
-				<tr>
-					<td>						
-						<a href="testgame.html"><button>Test Run</button></a>
-					</td>
-					<td>						
-						<button onclick="getChallenge()">Challenge</button>
-					</td>
-				</tr>
-        </table>
-
+         
+		<div class="logo">
+       <ul>
+		<li>	<img src="https://olive-contoso.s3.eu-west-1.amazonaws.com/athlonecc.ie/athlone.png"></li>	
+		<li>		<img src="https://www.lwetb.ie/wp-content/uploads/2019/10/LWETB_Logo_transparent-Header.png"></li>	
+		</ul>
+		</div>
+	        
+             
+		
+		<label for="usernameinp"> Enter your Username: </label>
+    	<input id="usernameinp" type="text"> 
+		
+		
+		
+		
+		<div class="container">
+			<div class="center">
+	        <button onclick="checkusername()">Check Username Availability</button>
+		</div>
+			
+		<div class="container">
+			<div class="center">
+			<a href="testgame.html"><button>Test Run</button></a>
+		</div>
+			
+		<div class="container">
+  <div class="center">	
+			
+	<a href="realgame.html"><button onclick="getChallenge()">Challenge</button></a>
+		</div>	
+			
     </body>
 </html>
