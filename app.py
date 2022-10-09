@@ -59,7 +59,7 @@ class DatabaseHandler():
                             guessid    INTEGER PRIMARY KEY,
                             guesser    INTEGER NOT NULL,
                             numguesses INTEGER NOT NULL,
-                            finished   BOOLEAN NOT NULL,
+                            timetaken  INTEGER NOT NULL,
                             FOREIGN KEY (guesser) REFERENCES users(id)
                        );""")
         self.commit()
@@ -92,7 +92,7 @@ class DatabaseHandler():
 
     def get_guesses(self):
         cur = self.get_cursor()
-        res = cur.execute("SELECT * FROM guesses;", [])
+        res = cur.execute("SELECT * FROM guesses ORDER BY timetaken ASC;", [])
         response = []
         for result in res.fetchall():
             response.append({
@@ -102,7 +102,7 @@ class DatabaseHandler():
                     "name": self.get_username(result[1])
                 },
                 "numguesses": result[2],
-                "finished": result[3]
+                "timetaken": result[3]
             })
         return response
 
@@ -115,11 +115,11 @@ class DatabaseHandler():
         self.commit()
         return True
 
-    def add_guess(self, userid, numguesses, finished):
+    def add_guess(self, userid, numguesses, timetaken):
         cur = self.get_cursor()
         cur.execute(
-            "INSERT INTO guesses(guesser, numguesses, finished) VALUES (?, ?, ?);",
-            (userid, numguesses, finished)
+            "INSERT INTO guesses(guesser, numguesses, timetaken) VALUES (?, ?, ?);",
+            (userid, numguesses, timetaken)
         )
         self.commit()
 
@@ -154,9 +154,9 @@ async def add_guess(request):
         userid = json["userid"]
 
     guesses = json["numguesses"]
-    correct = json["completed"]
+    timetaken = json["timetaken"]
 
-    db.add_guess(userid, guesses, correct)
+    db.add_guess(userid, guesses, timetaken)
     return web.HTTPCreated()
 
 @routes.get('/api/guesses')

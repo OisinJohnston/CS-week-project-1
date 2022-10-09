@@ -2,37 +2,82 @@ function rng(min, max) {
     return Math.floor(Math.random() * (max-min)) + min;
 }
 
-let number = rng(1, 200);
-let guesses = 0;
-let guessed = false;
-console.log(number);
+var number = rng(1, 200);
+var guesses = 0;
+var hints = 0;
+var startTime = Math.floor(Date.now() / 1000)
+
 
 function submit() {
     fetch(url='/api/guesses', {
         'method': 'POST',
-	'headers': {
-		'Content-Type': 'application/json'
-	},
-	'body': JSON.stringify({
-		"name": getCookie("username"),
-		"numguesses": guesses,
-		"completed": guessed
-	}) 
+	    'headers': {
+		    'Content-Type': 'application/json'
+
+        },
+
+        'body': JSON.stringify({
+    	    "name": getCookie("username"),
+    		"numguesses": guesses,
+	        "timetaken": Math.floor(Date.now() / 1000) - startTime
+        })
+
     }).then((resp) => {
-	    window.location.assign("./results.html") 
+	    window.location.assign("./results.html")
+
     })
+
 }
 
 function checkanwser() {
-    var guess = document.getElementById("ugnumber").value; 
-    guesses += 1;
+    let guess = document.getElementById("ugnumber").value;
+    guesses++;
+
     if (guess == number) {
-	guessed = true;
         alert("Correct Answer!");
-	submit();
-	return
+    	submit();
+	    return
     }
     alert("Wrong Answer!");
 }
+
+
+function getHint() {
+    hints++;
+    function genAlert(testnum, guessesleft) {
+        return (number>testnum ? "The number is": "The number isn't")+" greater than " + testnum + "\n you have " + guessesleft + " guesses left"
+    }
+    switch(hints) {
+        case 1:
+            alert(genAlert(100, 2))
+            break;
+        case 2:
+            if (number > 100) {
+                alert(genAlert(150, 1))
+            } else {
+                alert(genAlert(50, 1))
+            }
+            break;
+        case 3:
+            if (number>100) {
+                if (number > 150) {
+                    alert(genAlert(175, 0))
+                } else {
+                    alert(genAlert(125, 0))
+                }
+            } else {
+                if (number > 50) {
+                    alert(genAlert(75, 0))
+                } else {
+                    alert(genAlert(25, 0))
+                }
+            }
+            break;
+        default:
+            alert("You have no guesses remaining :( ")
+    }
+
+}
+
 
 
