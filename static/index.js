@@ -1,3 +1,4 @@
+//checks if username is taken
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);

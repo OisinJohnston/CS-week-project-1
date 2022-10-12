@@ -1,4 +1,4 @@
-
+//checks your username
 function checkusername() {
     let username = document.getElementById("usernameinp").value;
     fetch(url = '/api/users', {
@@ -18,7 +18,7 @@ function checkusername() {
         }
     })
 }
-
+//brings you to the real game but also cheaks if u put your username in the cheackusername box
 function getChallenge() {
     let username = getCookie("username");
     if (username == "") {

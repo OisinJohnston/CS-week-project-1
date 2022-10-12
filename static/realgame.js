@@ -28,7 +28,7 @@ function submit() {
     })
 
 }
-
+//Range of minimum to maximum numbers
 function checkanwser() {
     let guess = document.getElementById("ugnumber").value;
     guesses++;
@@ -49,37 +49,10 @@ function checkanwser() {
 
 function getHint() {
     hints++;
-    function genAlert(testnum, guessesleft) {
-        return (number>testnum ? "The number is": "The number isn't")+" greater than " + testnum + "\n you have " + guessesleft + " hints left"
-    }
-    switch(hints) {
-        case 1:
-            alert(genAlert(100, 2))
-            break;
-        case 2:
-            if (number > 100) {
-                alert(genAlert(150, 1))
-            } else {
-                alert(genAlert(50, 1))
-            }
-            break;
-        case 3:
-            if (number>100) {
-                if (number > 150) {
-                    alert(genAlert(175, 0))
-                } else {
-                    alert(genAlert(125, 0))
-                }
-            } else {
-                if (number > 50) {
-                    alert(genAlert(75, 0))
-                } else {
-                    alert(genAlert(25, 0))
-                }
-            }
-            break;
-        default:
-            alert("You have no hints remaining :( ")
+    if (number > lastguess){
+        alert("the number is between " + lastguess + "and 201")
+    }else {
+        alert("the number is between " + lastguess + "and 0")
     }
 
 }
