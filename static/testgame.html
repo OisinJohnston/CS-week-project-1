@@ -9,21 +9,19 @@
 
 <body>
     <div class="border">
-        <img src="./assets/acc.png">
-		<img src="./assets/lwetb.png">
+        <a href="/"><img src="./assets/acc.png" cursor="pointer"></a>
+		<img src="./assets/lwetb.png" style="float:right">
     </div>
-    <p>I have picked a whole number between 1 and 3. Enter your guess below</p>
-    <table>
-            <tr>
-                <td>
+    <h1>I have picked a whole number between 1 and 3. Enter your guess below</h1>
+
+        
                     <label for="ugnumber"></label>
                     <input type="number" id="ugnumber"><br>
                     <button onclick="alert(document.getElementById('ugnumber').value == 2? 'Correct!': 'Incorrect')">Check Answer</button>
                     <button onclick="getChallenge()">Challenge</button><br>
                     
-                </td>
-            </tr>
-    </table>
+           
+            
 </body>
 
 </html>

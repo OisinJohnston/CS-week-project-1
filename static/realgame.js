@@ -37,15 +37,20 @@ function checkanwser() {
         alert("Correct Answer!");
     	submit();
 	    return
+    } else if (guess > number){
+        alert("Your guess is greater than the number")
+    } else{
+        alert("Your guess is smaller than the number")
     }
-    alert("Wrong Answer!");
+
+
 }
 
 
 function getHint() {
     hints++;
     function genAlert(testnum, guessesleft) {
-        return (number>testnum ? "The number is": "The number isn't")+" greater than " + testnum + "\n you have " + guessesleft + " guesses left"
+        return (number>testnum ? "The number is": "The number isn't")+" greater than " + testnum + "\n you have " + guessesleft + " hints left"
     }
     switch(hints) {
         case 1:
@@ -74,7 +79,7 @@ function getHint() {
             }
             break;
         default:
-            alert("You have no guesses remaining :( ")
+            alert("You have no hints remaining :( ")
     }
 
 }
