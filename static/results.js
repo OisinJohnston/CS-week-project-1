@@ -1,3 +1,4 @@
+//logs info from database onto the table
 document.addEventListener("DOMContentLoaded", () => {
 	let restable = document.getElementById("results");
 	fetch(url = "/api/guesses", {

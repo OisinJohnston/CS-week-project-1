@@ -1,3 +1,4 @@
+//Range of minimum to maximum numbers
 function rng(min, max) {
     return Math.floor(Math.random() * (max-min)) + min;
 }
@@ -7,7 +8,7 @@ var guesses = 0;
 var hints = 0;
 var startTime = Math.floor(Date.now() / 1000)
 
-
+//logs your info to the database
 function submit() {
     fetch(url='/api/guesses', {
         'method': 'POST',
@@ -28,7 +29,7 @@ function submit() {
     })
 
 }
-
+//Checks if your answer is correct
 function checkanwser() {
     let guess = document.getElementById("ugnumber").value;
     guesses++;
@@ -46,7 +47,7 @@ function checkanwser() {
 
 }
 
-
+// It shows whether you number is closer to  200 or 1
 function getHint() {
     hints++;
     if (number > lastguess){
