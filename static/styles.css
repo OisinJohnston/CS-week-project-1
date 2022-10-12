@@ -20,9 +20,9 @@ button {
     color: #123;
     border-color: #123;
     border-style: solid;
-    height: 100px;
-    width: 200px;
-    font-size: 20px;
+    height: 50%;   
+    font-size: 60px;
+    width: 100%;
 }
 
 button:hover {
@@ -49,26 +49,27 @@ button:hover {
     
 
 img {
-    width: 10%;
+    width: 15%;
   }  
  
  
 
   
-  input[type=text], select {
+  input, select {
     width: 100%;
-    padding: 12px 20px;
+
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 5px solid #000;
     box-sizing: border-box;
+    font-size: 75px;
   }
 
   .container{
     display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    width: 100%;
+    
   }
 
 
@@ -79,4 +80,17 @@ img {
 	padding: 0px;
 	border: solid;
 
+}
+
+h1{
+    font-size: 60px;
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    font-size: 25px;
+    margin: auto;  
+    font-family: sans-serif;
+    background-color:rgb(156, 223, 211);
 }
