@@ -2,12 +2,13 @@ function rng(min, max) {
     return Math.floor(Math.random() * (max-min)) + min;
 }
 
+let lastguess = 1
 var number = rng(1, 200);
 var guesses = 0;
 var hints = 0;
 var startTime = Math.floor(Date.now() / 1000)
 
-
+//submits data to database
 function submit() {
     fetch(url='/api/guesses', {
         'method': 'POST',
@@ -28,16 +29,16 @@ function submit() {
     })
 
 }
-
+//Range of minimum to maximum numbers
 function checkanwser() {
-    let guess = document.getElementById("ugnumber").value;
+    lastguess = document.getElementById("ugnumber").value;
     guesses++;
 
-    if (guess == number) {
+    if (lastguess == number) {
         alert("Correct Answer!");
     	submit();
 	    return
-    } else if (guess > number){
+    } else if (lastguess > number){
         alert("Your guess is greater than the number")
     } else{
         alert("Your guess is smaller than the number")
@@ -46,40 +47,13 @@ function checkanwser() {
 
 }
 
-
+//calculates hint for user
 function getHint() {
     hints++;
-    function genAlert(testnum, guessesleft) {
-        return (number>testnum ? "The number is": "The number isn't")+" greater than " + testnum + "\n you have " + guessesleft + " hints left"
-    }
-    switch(hints) {
-        case 1:
-            alert(genAlert(100, 2))
-            break;
-        case 2:
-            if (number > 100) {
-                alert(genAlert(150, 1))
-            } else {
-                alert(genAlert(50, 1))
-            }
-            break;
-        case 3:
-            if (number>100) {
-                if (number > 150) {
-                    alert(genAlert(175, 0))
-                } else {
-                    alert(genAlert(125, 0))
-                }
-            } else {
-                if (number > 50) {
-                    alert(genAlert(75, 0))
-                } else {
-                    alert(genAlert(25, 0))
-                }
-            }
-            break;
-        default:
-            alert("You have no hints remaining :( ")
+    if (number > lastguess){
+        alert("the number is between " + lastguess + " and 200")
+    }else {
+        alert("the number is between " + lastguess + " and 1")
     }
 
 }

@@ -6,7 +6,6 @@ body {
 
 
 
-
 .border{ 
     background-color: #fff;
     border: 3px solid #123;
@@ -100,3 +99,6 @@ table{
     color: #ffffff;
     text-align: left;
 } 
+.p{
+   font-size: 15;
+}
