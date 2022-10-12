@@ -1,3 +1,4 @@
+//submits users data into scoreboard
 document.addEventListener("DOMContentLoaded", () => {
 	let restable = document.getElementById("results");
 	fetch(url = "/api/guesses", {
